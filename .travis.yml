@@ -2,10 +2,8 @@ dist: trusty
 language: node_js
 node_js:
 - '10.18.1'
-install:
-  - sudo wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  - sudo echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
-  - sudo apt-get update && apt-get install -yq google-chrome-stable openjdk-8-jdk gettext-base lsof
+addons:
+  chrome: stable
 before_script:
   - npm start &
 script:
