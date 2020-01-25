@@ -59,12 +59,14 @@ Then(/^the url should contain "(.*)"$/, async (urlText) => {
 /**
  * Click specific element.
  */
-When(/^(?:I click?|I follow?|) "([^"]*)"$/, (selector) => {
-  const xpath = '//*[contains(text(), "' + selector + '")'
-  + ' or contains(class, "' + selector + '")'
-  + ' or contains(@alt,"' + selector + '") or @id="' + selector + '"'
-  + ' or contains(@title, "' + selector + '")]';
-  return client.click('xpath', xpath);
+When(/^(?:I click?|I follow?|) "([^"]*)"$/, (locator) => {
+  const xpath = '//*[contains(text(), "' + locator + '")'
+  + ' or contains(class, "' + locator + '")'
+  + ' or contains(@alt,"' + locator + '") or @id="' + locator + '"'
+  + ' or contains(@title, "' + locator + '")]';
+  let selector = {selector: xpath, locateStrategy: 'xpath'};
+  client.assert.visible(locator);
+  return client.click(selector);
 })
 
 /**
