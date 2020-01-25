@@ -12,5 +12,4 @@ before_script:
   - npm start &
 script:
   - npm run cucumber -- --require tests/cucumber.conf.js  --require step-definitions/ tests/features/ --format node_modules/cucumber-pretty
-  // Kill the npm start execution.
   - pkill node
