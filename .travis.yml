@@ -1,0 +1,16 @@
+dist: trusty
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+language: node_js
+node_js:
+- '10.18.1'
+before_script:
+  - npm start &
+script:
+  - npm run cucumber -- --require tests/cucumber.conf.js  --require step-definitions/ tests/features/ --format node_modules/cucumber-pretty
+  // This one feels hacky, but does the job of killing the server
+  - pkill node
