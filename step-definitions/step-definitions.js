@@ -205,3 +205,76 @@ When('I view the site on a {string} device', (device) => {
     throw new Error('Device ' + device + ' not found.');
   }
 });
+
+/**
+ * Assert there is a specific button in the page.
+ */
+Then(/^I (?:should )?see the button "([^"]*)"$/, (locator) => {
+  const query_conditions = '@name= "' + locator +'"'
+  + ' or @title= "' + locator +'"'
+  + ' or @alt= "' + locator +'"'
+  + ' or @id= "' + locator +'" or ';
+  let xpath = '//button[' + query_conditions + 'normalize-space(text())="' + locator + '"]'
+  + ' | //input[@type="submit" or @type="button"][' + query_conditions + '@value="'+ locator + '"]';
+  let selector = {selector: xpath, locateStrategy: 'xpath'};
+  return client.assert.visible(selector);
+});
+/**
+ * Assert there is not a specific button in the page.
+ */
+Then(/^I should not see the button "([^"]*)"$/, (locator) => {
+  const query_conditions = '@name= "' + locator +'"'
+  + ' or @title= "' + locator +'"'
+  + ' or @alt= "' + locator +'"'
+  + ' or @id= "' + locator +'" or ';
+  let xpath = '//button[' + query_conditions + 'normalize-space(text())="' + locator + '"]'
+  + ' | //input[@type="submit" or @type="button"][' + query_conditions + '@value="'+ locator + '"]';
+  let selector = {selector: xpath, locateStrategy: 'xpath'};
+  return client.expect.element(selector).to.be.not.present;
+});
+/**
+ * Press a button.
+ */
+When(/^(?:|I )?press (?:|the )?"([^"]*)"(?:| button)?$/, (locator) => {
+  const query_conditions = '@name= "' + locator +'"'
+  + ' or @title= "' + locator +'"'
+  + ' or @alt= "' + locator +'"'
+  + ' or @id= "' + locator +'" or ';
+  let xpath = '//button[' + query_conditions + 'normalize-space(text())="' + locator + '"]'
+  + ' | //input[@type="submit" or @type="button"][' + query_conditions + '@value="'+ locator + '"]';
+  let selector = {selector: xpath, locateStrategy: 'xpath'};
+  client.assert.visible(selector);
+  return client.click(selector);
+});
+/**
+* Assert there is a specific checkbox selected.
+*/
+Then(/^the checkbox "([^"]*)" (?:is|should be) checked$/, (label) => {
+  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="checkbox"]', locateStrategy: 'xpath'};
+  client.assert.visible(selector);
+  return client.expect.element(selector).to.have.property('checked').equals(true);
+});
+/**
+* Assert there is a specific checkbox not selected.
+*/
+Then(/^the "([^"]*)" checkbox should (?:be unchecked|not be checked)$/, (label) => {
+  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="checkbox"]', locateStrategy: 'xpath'};
+  client.assert.visible(selector);
+  return client.expect.element(selector).to.have.property('checked').not.equals(true);
+});
+/**
+*
+*/
+Then('the {string} field should contain {string}', (label, text) => {
+  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="text" or @type="tel"]', locateStrategy: 'xpath'};
+  client.assert.visible(selector);
+  return client.expect.element(selector).does.contain(text);
+});
+/**
+*
+*/
+Then('the {string} field should not contain {string}', (label, text) => {
+  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="text" or @type="tel"]', locateStrategy: 'xpath'};
+  client.assert.visible(selector);
+  return client.expect.element(selector).does.not.contain(text);
+});
