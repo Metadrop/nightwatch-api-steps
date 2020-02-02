@@ -4,6 +4,9 @@
     "globals_path": "globals.js",
     "reporter": "junit",
     "output": "nightwatch.xml",
+    "page_objects_path": [
+      "page_objects"
+    ],
     "selenium" : {
       "start_process" : true,
       "server_path" : "./node_modules/selenium-server/lib/runner/selenium-server-standalone-3.5.3.jar",
