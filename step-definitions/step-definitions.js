@@ -37,7 +37,7 @@ Then(/^I should not see "([^"]*)"$/, (title) => {
  * Wait for the needed seconds.
  */
 Then('I wait for {int} seconds', async (seconds) => {
-  return client.pause(seconds * 1000)
+  return client.pause(seconds * 1000);
 });
 
 /**
