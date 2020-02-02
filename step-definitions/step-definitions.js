@@ -1,6 +1,8 @@
 const { client } = require('nightwatch-api');
 const { Given, Then, When } = require('cucumber');
 
+const nasPage = client.page.nasPage();
+
 /** Visit path of the main url defined in .env */
 Given(/^(?:I go to?|I am at?|I am on?|I visit) "([^"]*)"$/, (page) => {
   return client.url(client.globals.baseUrl + page).waitForElementVisible('body', 1000);
@@ -18,8 +20,8 @@ Given(/^(?:I go to?|I am at?|I am on?|I visit) homepage$/, () => {
  *
  * @TODO: regions!
  */
-Then(/^I should see "([^"]*)"$/, (title) => {
-  return client.assert.containsText('html', title);
+Then(/^I should see "([^"]*)"$/, (text) => {
+  return nasPage.assertPageContainsText(text);
 });
 
 /**
