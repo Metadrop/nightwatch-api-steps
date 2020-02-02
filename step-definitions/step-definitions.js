@@ -254,6 +254,7 @@ Then(/^the checkbox "([^"]*)" (?:is|should be) checked$/, (label) => {
   client.assert.visible(selector);
   return client.expect.element(selector).to.have.property('checked').equals(true);
 });
+
 /**
 * Assert there is a specific checkbox not selected.
 */
@@ -262,19 +263,21 @@ Then(/^the "([^"]*)" checkbox should (?:be unchecked|not be checked)$/, (label) 
   client.assert.visible(selector);
   return client.expect.element(selector).to.have.property('checked').not.equals(true);
 });
+
 /**
-*
-*/
+ * Check a specific field contains a text.
+ */
 Then('the {string} field should contain {string}', (label, text) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="text" or @type="tel"]', locateStrategy: 'xpath'};
+  let selector = {selector: '//label[contains(text(), "' + label + '")]/../*[self::input or self::select]', locateStrategy: 'xpath'};
   client.assert.visible(selector);
-  return client.expect.element(selector).does.contain(text);
+  return client.expect.element(selector).value.does.contain(text);
 });
+
 /**
-*
-*/
+ * CHeck a field does not contain a specific test.
+ */
 Then('the {string} field should not contain {string}', (label, text) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="text" or @type="tel"]', locateStrategy: 'xpath'};
+  let selector = {selector: '//label[contains(text(), "' + label + '")]/../*[self::input or self::select]', locateStrategy: 'xpath'};
   client.assert.visible(selector);
-  return client.expect.element(selector).does.not.contain(text);
+  return client.expect.element(selector).value.does.not.contain(text);
 });
