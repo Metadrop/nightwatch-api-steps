@@ -21,6 +21,7 @@ Scenario: Press a <button>.
     Then I should not see "Confirm page"
     When I press "Button"
     Then I should see "Confirm page"
+    And the url should contain "/confirm_page.html"
 
 @form @submit @input-submit
 Scenario: Press a submit input.
@@ -28,3 +29,4 @@ Scenario: Press a submit input.
     Then I should not see "Confirm page"
     When I press "Button as input"
     Then I should see "Confirm page"
+    And the url should contain "/confirm_page.html"
