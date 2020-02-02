@@ -34,17 +34,6 @@ Then(/^I should not see "([^"]*)"$/, (title) => {
 });
 
 /**
- * Scroll to specific element with a offset, if defined.
- */
-When(/^I scroll to "([^"]*)"(?: with "([^"]*)")?$/, (selector, offset) => {
-  if (typeof offset === 'undefined') {
-    offset = 0;
-  }
-
-  return client.moveToElement(selector, offset, offset);
-});
-
-/**
  * Wait for the needed seconds.
  */
 Then('I wait for {int} seconds', async (seconds) => {
@@ -55,7 +44,7 @@ Then('I wait for {int} seconds', async (seconds) => {
  * @TODO
  */
 Then(/^the url should contain "(.*)"$/, async (urlText) => {
-  return client.expect.url().to.contain(urlText);
+  return nasPage.assertUrlContains(urlText);
 })
 
 /**

@@ -17,6 +17,15 @@ module.exports = {
       },
       assertPageNotContainsText: function (text) {
         return this.api.assert.not.containsText('html', text);
+      },
+      scrollWithOffset: function (selector, offset) {
+        if (typeof offset === 'undefined') {
+          offset = 0;
+        }
+        return this.api.moveToElement(selector, offset, offset);
+      },
+      assertUrlContains: function (urlText) {
+        return this.api.expect.url().to.contain(urlText);
       }
     }
   ],
