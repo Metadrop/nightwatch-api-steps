@@ -4,7 +4,7 @@
   "description": "Generic steps that can be used with nightwatch-api",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node tests/web/index.js",
     "cucumber": "cucumber-js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
