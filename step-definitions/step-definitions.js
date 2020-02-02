@@ -2,6 +2,7 @@ const { client } = require('nightwatch-api');
 const { Given, Then, When } = require('cucumber');
 
 const nasPage = client.page.nasPage();
+const nasLink = client.page.nasLink();
 
 /** Visit path of the main url defined in .env */
 Given(/^(?:I go to?|I am at?|I am on?|I visit) "([^"]*)"$/, (page) => {
@@ -51,21 +52,21 @@ Then(/^the url should contain "(.*)"$/, async (urlText) => {
  * Click specific element.
  */
 When(/^(?:I click?|I follow?|) "([^"]*)"$/, (locator) => {
-  return nasPage.clickLink(locator);
+  return nasLink.clickLink(locator);
 })
 
 /**
  * Assert link is visible.
  */
 Then('I should see the link {string}', (locator) => {
-  return nasPage.assertLinkVisible(locator);
+  return nasLink.assertLinkVisible(locator);
 })
 
 /**
  * Assert link is not visible.
  */
 Then('I should not see the link {string}', (locator) => {
-  return nasPage.assertLinkNotPresent(locator);
+  return nasLink.assertLinkNotPresent(locator);
 })
 
 /**
