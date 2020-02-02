@@ -3,6 +3,7 @@ const { Given, Then, When } = require('cucumber');
 
 const nasPage = client.page.nasPage();
 const nasLink = client.page.nasLink();
+const nasTable = client.page.nasTable();
 
 /** Visit path of the main url defined in .env */
 Given(/^(?:I go to?|I am at?|I am on?|I visit) "([^"]*)"$/, (page) => {
@@ -73,14 +74,14 @@ Then('I should not see the link {string}', (locator) => {
  * Assert that a specific text is being seen in a specific table row.
  */
 Then(/^I should see "([^"]*)" in the table row$/, (text) => {
-  return client.assert.containsText('table tr', text);
+  return nasTable.assertTableRowContainsText(text);
 });
 
 /**
  * Assert that a specific text is not being seen in a specific table row.
  */
 Then(/^I should not see "([^"]*)" in the table row$/, (text) => {
-  return client.assert.not.containsText('table tr', text);
+  return nasTable.assertTableRowNotContainsText(text);
 });
 
 /**
