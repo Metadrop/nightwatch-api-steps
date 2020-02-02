@@ -10,6 +10,9 @@ module.exports = {
     {
       assertPageContainsText: function (text) {
           return this.api.assert.containsText('html', text);
+      },
+      assertPageNotContainsText: function (text) {
+        return this.api.assert.not.containsText('html', text);
       }
     }
   ],

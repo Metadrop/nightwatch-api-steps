@@ -30,7 +30,7 @@ Then(/^I should see "([^"]*)"$/, (text) => {
  * @TODO: regions!
  */
 Then(/^I should not see "([^"]*)"$/, (title) => {
-  return client.assert.not.containsText('html', title);
+  return nasPage.assertPageNotContainsText('html', title);
 });
 
 /**
