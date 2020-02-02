@@ -26,6 +26,25 @@ module.exports = {
       },
       assertUrlContains: function (urlText) {
         return this.api.expect.url().to.contain(urlText);
+      },
+      clickLink: function (locator) {
+        let selector = this.getLinkSelector(locator);
+        this.api.assert.visible(selector);
+        return this.api.click(selector);
+      },
+      assertLinkVisible: function (locator) {
+        let selector = this.getLinkSelector(locator);
+        return this.api.assert.visible(selector);
+      },
+      assertLinkNotPresent: function (locator) {
+        let selector = this.getLinkSelector(locator);
+        return this.api.expect.element(selector).to.be.not.present;
+      },
+      getLinkSelector: function(locator) {
+        let xpath = '//a[contains(text(), "' + locator + '")'
+        + ' or contains(@alt,"' + locator + '") or @id="' + locator + '"'
+        + ' or contains(@title, "' + locator + '")]';
+        return {selector: xpath, locateStrategy: 'xpath'};
       }
     }
   ],
