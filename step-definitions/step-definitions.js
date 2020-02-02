@@ -51,39 +51,22 @@ Then(/^the url should contain "(.*)"$/, async (urlText) => {
  * Click specific element.
  */
 When(/^(?:I click?|I follow?|) "([^"]*)"$/, (locator) => {
-  const xpath = '//*[contains(text(), "' + locator + '")'
-  + ' or contains(class, "' + locator + '")'
-  + ' or contains(@alt,"' + locator + '") or @id="' + locator + '"'
-  + ' or contains(@title, "' + locator + '")]';
-  let selector = {selector: xpath, locateStrategy: 'xpath'};
-  client.assert.visible(locator);
-  return client.click(selector);
+  return nasPage.clickLink(locator);
 })
 
 /**
  * Assert link is visible.
  */
 Then('I should see the link {string}', (locator) => {
-  const xpath = '//a[contains(text(), "' + locator + '")'
-  + ' or contains(@href, "' + locator + '")'
-  + ' or contains(@alt,"' + locator + '") or @id="' + locator + '"'
-  + ' or contains(@title, "' + locator + '")]';
-  let selector = {selector: xpath, locateStrategy: 'xpath'};
-  return client.assert.visible(selector);
+  return nasPage.assertLinkVisible(locator);
 })
 
 /**
  * Assert link is not visible.
  */
 Then('I should not see the link {string}', (locator) => {
-  const xpath = '//a[contains(text(), "' + locator + '")'
-  + ' or contains(@href, "' + locator + '")'
-  + ' or contains(@alt,"' + locator + '") or @id="' + locator + '"'
-  + ' or contains(@title, "' + locator + '")]';
-  let selector = {selector: xpath, locateStrategy: 'xpath'};
-  return client.expect.element(selector).to.be.not.present;
+  return nasPage.assertLinkNotPresent(locator);
 })
-
 
 /**
  * Assert that a specific text is being seen in a specific table row.
