@@ -8,6 +8,10 @@ module.exports = {
   elements: {},
   commands: [
     {
+      goToUrl(url) {
+        return this.api.url(url)
+          .waitForElementVisible('body', this.waitForElementTime);
+      },
       assertPageContainsText: function (text) {
           return this.api.assert.containsText('html', text);
       },
@@ -17,6 +21,9 @@ module.exports = {
     }
   ],
   // object version (best considered immutable)
-  props: {},
+  props: {
+    waitForElementTime: 1000,
+    waitTime: 1000
+  },
   sections: { }
 };

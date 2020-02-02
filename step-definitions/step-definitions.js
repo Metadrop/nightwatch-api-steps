@@ -5,14 +5,14 @@ const nasPage = client.page.nasPage();
 
 /** Visit path of the main url defined in .env */
 Given(/^(?:I go to?|I am at?|I am on?|I visit) "([^"]*)"$/, (page) => {
-  return client.url(client.globals.baseUrl + page).waitForElementVisible('body', 1000);
+  return nasPage.goToUrl(client.globals.baseUrl + page);
 });
 
 /**
  * Visit homepage
  */
 Given(/^(?:I go to?|I am at?|I am on?|I visit) homepage$/, () => {
-  return client.url(client.globals.baseUrl).waitForElementVisible('body', 1000);
+  return nasPage.goToUrl(client.globals.baseUrl);
 });
 
 /**
