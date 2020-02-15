@@ -13,6 +13,7 @@ function buildLinkSelector(locator) {
     + ' or contains(@title, "' + locator + '")]';
     return {selector: xpath, locateStrategy: 'xpath'};
 }
+
 /**
  * Build a xpath table row selector.
  *
