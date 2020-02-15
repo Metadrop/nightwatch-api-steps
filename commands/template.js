@@ -1,4 +1,4 @@
-const link = require('../helpers/link');
+const link = require('../helpers/selectors');
 const { client } = require('nightwatch-api');
 
 /**

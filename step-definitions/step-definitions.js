@@ -1,8 +1,7 @@
 const { client } = require('nightwatch-api');
 const { Given, Then, When } = require('cucumber');
 
-const link = require('../helpers/link');
-const table = require('../helpers/table');
+const selectors = require('../helpers/selectors');
 
 /** Visit path of the main url defined in .env */
 Given(/^(?:I go to?|I am at?|I am on?|I visit) "([^"]*)"$/, (page) => {
@@ -59,7 +58,7 @@ When(/^(?:I click?|I follow?|) "([^"]*)"$/, (locator) => {
  * Assert link is visible.
  */
 Then('I should see the link {string}', (locator) => {
-  let selector = link.buildLinkSelector(locator);
+  let selector = selectors.buildLinkSelector(locator);
   return client.assert.visible(selector);
 })
 
@@ -67,7 +66,7 @@ Then('I should see the link {string}', (locator) => {
  * Assert link is not visible.
  */
 Then('I should not see the link {string}', (locator) => {
-  let selector = link.buildLinkSelector(locator);
+  let selector = selectors.buildLinkSelector(locator);
   return client.expect.element(selector).to.be.not.present;
 })
 
@@ -75,7 +74,7 @@ Then('I should not see the link {string}', (locator) => {
  * Assert that a specific text is being seen in a specific table row.
  */
 Then(/^I should see "([^"]*)" in the table row$/, (text) => {
-  let xpath = table.buildTableRowSelector(text);
+  let xpath = selectors.buildTableRowSelector(text);
   return client.assert.visible(xpath);
 });
 
@@ -83,7 +82,7 @@ Then(/^I should see "([^"]*)" in the table row$/, (text) => {
  * Assert that a specific text is not being seen in a specific table row.
  */
 Then(/^I should not see "([^"]*)" in the table row$/, (text) => {
-  let xpath = table.buildTableRowSelector(text);
+  let xpath = selectors.buildTableRowSelector(text);
   return client.expect.element(xpath).to.not.be.present;
 });
 

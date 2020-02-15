@@ -13,5 +13,15 @@ function buildLinkSelector(locator) {
     + ' or contains(@title, "' + locator + '")]';
     return {selector: xpath, locateStrategy: 'xpath'};
 }
+/**
+ * Build a xpath table row selector.
+ *
+ * @param {*} locator 
+ */
+function buildTableRowSelector(text) {
+    let xpath = '//table//tr[contains(*, "' + text + '")]';
+    return {selector: xpath, locateStrategy: 'xpath'};
+}
 
 module.exports.buildLinkSelector = buildLinkSelector;
+module.exports.buildTableRowSelector = buildTableRowSelector;
