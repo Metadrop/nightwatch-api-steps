@@ -134,31 +134,22 @@ When('I attach the file {string} to {string}', async (relative_path, locator) =>
  * Take a screenshot with any name.
  */
 When('I take a screenshot', () => {
-  let path = client.globals.getScreenshotRealPath(client.globals.generateScreenshotFileName());
-  console.log('Screenshot saved at ' + path);
-  return client.saveScreenshot(path);
+  let date = new Date();
+  let path = 'screenshot-'
+  + date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate()
+  + '-' + date.getHours() + date.getMinutes() + date.getSeconds() + '.png';
+  return client.saveScreenshotInFolder(path);
 });
 
 /**
  * Take a screenshot with a specific name.
  */
-When('I take a screenshot {string}', (name) => {
-  let path = client.globals.getScreenshotRealPath(name + '.png');
-  console.log('Screenshot saved at ' + path);
-  return client.saveScreenshot(path);
+When('I take a screenshot with name {string}', (name) => {
+  return client.saveScreenshotInFolder(name + '.png');
 });
 
 When('I view the site on a {string} device', (device) => {
-  console.log(typeof(client.globals.devices[device].width));
-  if (typeof(client.globals.devices) != undefined && typeof(client.globals.devices[device]) === 'object'
-    && typeof(client.globals.devices[device].width) === "number"
-    && typeof(client.globals.devices[device].height) === "number") {
-    let dimensions = client.globals.devices[device];
-    return client.resizeWindow(dimensions.width, dimensions.height);
-  }
-  else {
-    throw new Error('Device ' + device + ' not found.');
-  }
+  return client.resizeWindowDevice(device);
 });
 
 /**
