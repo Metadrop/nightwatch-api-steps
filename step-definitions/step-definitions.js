@@ -120,9 +120,7 @@ When('I select radio button {string}', (label) => {
  * Fills a textfield with a specific label.
  */
 When('I fill in {string} with {string}', (locator, value) => {
-  let selector = {selector: '//label[contains(text(), "' + locator + '")]/../*[self::input or self::select]', locateStrategy: 'xpath'};
-  client.assert.visible(selector);
-  return client.setValue(selector, value);
+  return client.fillField(locator, value);
 });
 
 /**
