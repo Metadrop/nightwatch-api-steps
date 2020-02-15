@@ -176,27 +176,15 @@ When('I view the site on a {string} device', (device) => {
  * Assert there is a specific button in the page.
  */
 Then(/^I (?:should )?see the button "([^"]*)"$/, (locator) => {
-  const query_conditions = '@name= "' + locator +'"'
-  + ' or @title= "' + locator +'"'
-  + ' or @alt= "' + locator +'"'
-  + ' or @id= "' + locator +'" or ';
-  let xpath = '//button[' + query_conditions + 'normalize-space(text())="' + locator + '"]'
-  + ' | //input[@type="submit" or @type="button"][' + query_conditions + '@value="'+ locator + '"]';
-  let selector = {selector: xpath, locateStrategy: 'xpath'};
-  return client.assert.visible(selector);
+  let button = selectors.buildButtonSelector(locator);
+  return client.assert.visible(button);
 });
 /**
  * Assert there is not a specific button in the page.
  */
 Then(/^I should not see the button "([^"]*)"$/, (locator) => {
-  const query_conditions = '@name= "' + locator +'"'
-  + ' or @title= "' + locator +'"'
-  + ' or @alt= "' + locator +'"'
-  + ' or @id= "' + locator +'" or ';
-  let xpath = '//button[' + query_conditions + 'normalize-space(text())="' + locator + '"]'
-  + ' | //input[@type="submit" or @type="button"][' + query_conditions + '@value="'+ locator + '"]';
-  let selector = {selector: xpath, locateStrategy: 'xpath'};
-  return client.expect.element(selector).to.be.not.present;
+  let button = selectors.buildButtonSelector(locator);
+  return client.expect.element(button).to.be.not.present;
 });
 /**
  * Press a button.
