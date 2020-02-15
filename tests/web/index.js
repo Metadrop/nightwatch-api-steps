@@ -8,11 +8,11 @@ var fs = require("fs");
 console.log("Running on http://localhost:3000");
 
 http.createServer(function(request, response) {
-  console.log(request.url);
   let file = '';
   switch (request.url) {
+    case '/secondary_page.html':
     case '/confirm_page.html':
-      file = 'tests/web/confirm_page.html';
+      file = 'tests/web' + request.url;
       break;
 
     case '/':
