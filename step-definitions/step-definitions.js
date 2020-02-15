@@ -187,7 +187,7 @@ When(/^(?:|I )?press (?:|the )?"([^"]*)"(?:| button)?$/, (locator) => {
 * Assert there is a specific checkbox selected.
 */
 Then(/^the checkbox "([^"]*)" (?:is|should be) checked$/, (label) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="checkbox"]', locateStrategy: 'xpath'};
+  let selector = selectors.buildInputSelector(label, 'checkbox');
   client.assert.visible(selector);
   return client.expect.element(selector).to.have.property('checked').equals(true);
 });
@@ -196,7 +196,7 @@ Then(/^the checkbox "([^"]*)" (?:is|should be) checked$/, (label) => {
 * Assert there is a specific checkbox not selected.
 */
 Then(/^the "([^"]*)" checkbox should (?:be unchecked|not be checked)$/, (label) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="checkbox"]', locateStrategy: 'xpath'};
+  let selector = selectors.buildInputSelector(label, 'checkbox');
   client.assert.visible(selector);
   return client.expect.element(selector).to.have.property('checked').not.equals(true);
 });
@@ -205,7 +205,7 @@ Then(/^the "([^"]*)" checkbox should (?:be unchecked|not be checked)$/, (label) 
  * Check a specific field contains a text.
  */
 Then('the {string} field should contain {string}', (label, text) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../*[self::input or self::select]', locateStrategy: 'xpath'};
+  let selector = selectors.buildInputSelector(label);
   client.assert.visible(selector);
   return client.expect.element(selector).value.does.contain(text);
 });
@@ -214,7 +214,7 @@ Then('the {string} field should contain {string}', (label, text) => {
  * CHeck a field does not contain a specific test.
  */
 Then('the {string} field should not contain {string}', (label, text) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../*[self::input or self::select]', locateStrategy: 'xpath'};
+  let selector = selectors.buildInputSelector(label);
   client.assert.visible(selector);
   return client.expect.element(selector).value.does.not.contain(text);
 });
