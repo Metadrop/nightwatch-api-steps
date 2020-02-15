@@ -5,4 +5,4 @@ Scenario: Fill a form
     Given I go to "/"
     Then I should see "Nightwatch tests"
     And I take a screenshot
-    And I take a screenshot "my-landing-page"
+    And I take a screenshot with name "my-landing-page"
