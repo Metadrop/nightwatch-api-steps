@@ -99,30 +99,21 @@ When('I select {string} from {string}', (option, label) => {
  * Check a checkbox with a specific label.
  */
 When('I check {string}', (label) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="checkbox"]', locateStrategy: 'xpath'};
-  client.assert.visible(selector);
-  client.expect.element(selector).to.have.property('checked').not.equals(true);
-  return client.click(selector);
+  return client.checkFormField(label, 'checkbox');
 });
 
 /**
  * Uncheck a checkbox with a specific label.
  */
 When('I uncheck {string}', (label) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="checkbox"]', locateStrategy: 'xpath'};
-  client.assert.visible(selector);
-  client.expect.element(selector).to.have.property('checked').equals(true);
-  return client.click(selector);
+  return client.uncheck(label);
 });
 
 /**
  * Select radio button with a specific label.
  */
 When('I select radio button {string}', (label) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../input[@type="radio"]', locateStrategy: 'xpath'};
-  client.assert.visible(selector);
-  client.expect.element(selector).to.have.property('checked').not.equals(true);
-  return client.click(selector);
+  return client.checkFormField(label, 'radio');
 });
 
 /**
