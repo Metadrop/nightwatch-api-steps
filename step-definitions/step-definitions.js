@@ -190,15 +190,7 @@ Then(/^I should not see the button "([^"]*)"$/, (locator) => {
  * Press a button.
  */
 When(/^(?:|I )?press (?:|the )?"([^"]*)"(?:| button)?$/, (locator) => {
-  const query_conditions = '@name= "' + locator +'"'
-  + ' or @title= "' + locator +'"'
-  + ' or @alt= "' + locator +'"'
-  + ' or @id= "' + locator +'" or ';
-  let xpath = '//button[' + query_conditions + 'normalize-space(text())="' + locator + '"]'
-  + ' | //input[@type="submit" or @type="button"][' + query_conditions + '@value="'+ locator + '"]';
-  let selector = {selector: xpath, locateStrategy: 'xpath'};
-  client.assert.visible(selector);
-  return client.click(selector);
+  return client.pressButton(locator);
 });
 /**
 * Assert there is a specific checkbox selected.
