@@ -1,9 +1,14 @@
 const { client } = require('nightwatch-api');
 
 /**
- * Click a link.
+ * Scrolls to a selector with a specific offset.
+ *
+ * @param {string} selector
+ *   Selector.
+ * @param {int} offset
+ *   offset.
  */
-module.exports.command = function() {
+module.exports.command = function(selector, offset) {
     if (typeof offset === 'undefined') {
         offset = 0;
     }
