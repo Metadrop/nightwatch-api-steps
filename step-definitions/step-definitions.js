@@ -90,7 +90,7 @@ Then(/^I should not see "([^"]*)" in the table row$/, (text) => {
  * Select an option from a select list with a specific label.
  */
 When('I select {string} from {string}', (option, label) => {
-  let selector = {selector: '//label[contains(text(), "' + label + '")]/../select//option[text()="' + option + '"]', locateStrategy: 'xpath'};
+  let selector = {selector: '//div[label[contains(text(), "' + label + '")]]/select//option[text()="' + option + '"]', locateStrategy: 'xpath'};
   client.assert.visible(selector, 'Exists a option named "' + label + '" in a selector with "' + label + '" label.');
   return client.click(selector, "Clicks the option");
 });
