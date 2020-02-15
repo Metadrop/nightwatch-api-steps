@@ -4,6 +4,9 @@
     "globals_path": "globals.js",
     "reporter": "junit",
     "output": "nightwatch.xml",
+    "custom_commands_path": [
+      "commands"
+    ],
     "page_objects_path": [
       "page_objects"
     ],

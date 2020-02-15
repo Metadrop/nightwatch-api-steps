@@ -1,20 +1,19 @@
 const { client } = require('nightwatch-api');
 const { Given, Then, When } = require('cucumber');
 
-const nasPage = client.page.nasPage();
-const nasLink = client.page.nasLink();
-const nasTable = client.page.nasTable();
+const link = require('../helpers/link');
+const table = require('../helpers/table');
 
 /** Visit path of the main url defined in .env */
 Given(/^(?:I go to?|I am at?|I am on?|I visit) "([^"]*)"$/, (page) => {
-  return nasPage.goToUrl(client.globals.baseUrl + page);
+  return client.goToUrl(client.globals.baseUrl + page);
 });
 
 /**
  * Visit homepage
  */
 Given(/^(?:I go to?|I am at?|I am on?|I visit) homepage$/, () => {
-  return nasPage.goToUrl(client.globals.baseUrl);
+  return client.goToUrl(client.globals.baseUrl);
 });
 
 /**
@@ -23,7 +22,7 @@ Given(/^(?:I go to?|I am at?|I am on?|I visit) homepage$/, () => {
  * @TODO: regions!
  */
 Then(/^I should see "([^"]*)"$/, (text) => {
-  return nasPage.assertPageContainsText(text);
+  return client.assert.containsText('html', text)
 });
 
 /**
@@ -31,8 +30,8 @@ Then(/^I should see "([^"]*)"$/, (text) => {
  *
  * @TODO: regions!
  */
-Then(/^I should not see "([^"]*)"$/, (title) => {
-  return nasPage.assertPageNotContainsText('html', title);
+Then(/^I should not see "([^"]*)"$/, (text) => {
+  return client.assert.not.containsText('html', text)
 });
 
 /**
@@ -46,42 +45,46 @@ Then('I wait for {int} seconds', async (seconds) => {
  * @TODO
  */
 Then(/^the url should contain "(.*)"$/, async (urlText) => {
-  return nasPage.assertUrlContains(urlText);
+  return client.expect.url().to.contain(urlText);
 })
 
 /**
  * Click specific element.
  */
 When(/^(?:I click?|I follow?|) "([^"]*)"$/, (locator) => {
-  return nasLink.clickLink(locator);
+  return client.clickLink(locator);
 })
 
 /**
  * Assert link is visible.
  */
 Then('I should see the link {string}', (locator) => {
-  return nasLink.assertLinkVisible(locator);
+  let selector = link.buildLinkSelector(locator);
+  return client.assert.visible(selector);
 })
 
 /**
  * Assert link is not visible.
  */
 Then('I should not see the link {string}', (locator) => {
-  return nasLink.assertLinkNotPresent(locator);
+  let selector = link.buildLinkSelector(locator);
+  return client.expect.element(selector).to.be.not.present;
 })
 
 /**
  * Assert that a specific text is being seen in a specific table row.
  */
 Then(/^I should see "([^"]*)" in the table row$/, (text) => {
-  return nasTable.assertTableRowContainsText(text);
+  let xpath = table.buildTableRowSelector(text);
+  return client.assert.visible(xpath);
 });
 
 /**
  * Assert that a specific text is not being seen in a specific table row.
  */
 Then(/^I should not see "([^"]*)" in the table row$/, (text) => {
-  return nasTable.assertTableRowNotContainsText(text);
+  let xpath = table.buildTableRowSelector(text);
+  return client.expect.element(xpath).to.not.be.present;
 });
 
 /**
