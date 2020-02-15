@@ -1,7 +1,12 @@
 const { client } = require('nightwatch-api');
 
 /**
- * Click a link.
+ * Go to a specific url.
+ *
+ * @param {string} url
+ *   Url.
+ * @param {int} wait
+ *   Time to wait for body.
  */
 module.exports.command = function(url, wait) {
     if (typeof wait !== 'number') {
