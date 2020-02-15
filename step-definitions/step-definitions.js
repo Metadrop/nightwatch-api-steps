@@ -88,15 +88,6 @@ Then(/^I should not see "([^"]*)" in the table row$/, (text) => {
 });
 
 /**
- * Click in a link of a table row.
- *
- * @TODO: make it works like 'I click {string}' step!
- */
-Then('I click {string} in the table row', (selector) => {
-  return client.click('xpath', '//a[contains(text(), "' + selector + '")]');
-});
-
-/**
  * Select an option from a select list with a specific label.
  */
 When('I select {string} from {string}', (option, label) => {
