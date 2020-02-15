@@ -138,10 +138,7 @@ When('I fill in {string} with {string}', (locator, value) => {
  * Attachs a file to a file field.
  */
 When('I attach the file {string} to {string}', async (relative_path, locator) => {
-  let selector = {selector: '//label[contains(text(), "' + locator + '")]/../input[@type="file"]', locateStrategy: 'xpath'};
-  let fullpath = client.globals.getFilesRealPath(relative_path);
-  client.assert.visible(selector);
-  return await client.setValue(selector, fullpath);
+  return client.attachFile(relative_path, locator);
 });
 
 /**
