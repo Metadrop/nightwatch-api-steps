@@ -20,7 +20,7 @@ function buildLinkSelector(locator) {
  * @param {*} locator 
  */
 function buildTableRowSelector(text) {
-    let xpath = '//table//tr[contains(*, "' + text + '")]';
+    let xpath = '//table//tr/*[self::th or self::td][contains(*, ' + text + ') or contains(text(), ' + text + ')] ';
     return {selector: xpath, locateStrategy: 'xpath'};
 }
 
