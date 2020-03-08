@@ -207,3 +207,31 @@ Then('the {string} field should not contain {string}', (label, text) => {
   client.assert.visible(selector);
   return client.expect.element(selector).value.does.not.contain(text);
 });
+
+/**
+ * Wait for AJAX to finish.
+ */
+Then('I wait for AJAX to finish', async () => {
+  await client.waitForAjax();
+});
+
+/**
+ * Wait for AJAX to finish.
+ */
+Then('I wait for AJAX to finish at least {int} seconds', async (seconds) => {
+  await client.waitForAjax(undefined, seconds);
+});
+
+/**
+ * Wait for specific URL path to finish.
+ */
+Then('I wait for {string} AJAX request to finish', async (url) => {
+  await client.waitForAjax(url);
+});
+
+/**
+ * Wait for AJAX to finish.
+ */
+Then('I wait for {string} AJAX request to finish at least {int} seconds', async (url, seconds) => {
+  await client.waitForAjax(url, seconds);
+});
