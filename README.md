@@ -4,11 +4,14 @@
 [![Build Status](https://travis-ci.org/Metadrop/nightwatch-api-steps.svg?branch=master)](https://travis-ci.org/Metadrop/nightwatch-api-steps)
 [![github](https://img.shields.io/badge/PRs-welcome-blue.svg)](https://github.com/Metadrop/nightwatch-api-steps)
 
-Generic steps that can be used from [nightwatch api](https://github.com/mucsi96/nightwatch-api).
+Library that contains multi purporse cucumber steps for nightwatch testing.
+
+Use it for your nightwatch tests that are based on [nightwatch api](https://github.com/mucsi96/nightwatch-api).
 
 ## Installation
 
-Install it with
+Install it with the following command:
+
 `npm install nightwatch-api-steps`
 
 ### Usage
