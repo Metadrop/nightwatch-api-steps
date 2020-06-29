@@ -5,7 +5,7 @@
 /**
  * Build a xpath link selector.
  *
- * @param {*} locator 
+ * @param {*} locator
  */
 function buildLinkSelector(locator) {
     let xpath = '//a[contains(text(), "' + locator + '")'
@@ -17,7 +17,7 @@ function buildLinkSelector(locator) {
 /**
  * Build a xpath table row selector.
  *
- * @param {*} locator 
+ * @param {*} locator
  */
 function buildTableRowSelector(text) {
     let xpath = '//table//tr/*[self::th or self::td][contains(*, "' + text + '") or contains(text(), "' + text + '")] ';
@@ -41,20 +41,26 @@ function buildButtonSelector(locator) {
 /**
  * Build input selector for a specific type.
  *
- * It consider that the input is in the dame container
+ * It considers that the input is in the same container
  * than the label.
+ *
+ * It also searches for ID attribute directly on the input.
  *
  * @param {*} type
  * @param {*} label
  */
 function buildInputSelector(label, type) {
     let type_filter = '';
+
     if (typeof type === 'string') {
         type_filter = '[@type="' + type + '"]';
     }
-    return selector = {selector: '//div[label[contains(text(), "' + label + '")]]/*[self::input' + type_filter + ' or self::select]', locateStrategy: 'xpath'};
-}
 
+    let xpath = '//div[label[contains(*, "' + label + '")]]/*[self::input' + type_filter + ' or self::select or self::textarea]'
+    + ' | //*[self::input' + type_filter + ' or self::select or self::textarea][@id="' + label + '"]';
+
+    return selector = {selector: xpath, locateStrategy: 'xpath'};
+}
 
 module.exports.buildLinkSelector = buildLinkSelector;
 module.exports.buildTableRowSelector = buildTableRowSelector;
