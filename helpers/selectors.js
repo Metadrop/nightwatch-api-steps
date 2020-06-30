@@ -48,16 +48,21 @@ function buildButtonSelector(locator) {
  *
  * @param {*} type
  * @param {*} label
+ * @param {*} region
  */
-function buildInputSelector(label, type) {
+function buildInputSelector(label, type, region) {
     let type_filter = '';
 
     if (typeof type === 'string') {
       type_filter = '[@type="' + type + '"]';
     }
 
-    const xpath = '//*[self::input or self::select or self::textarea]' + type_filter + '[@id=//*[contains(text(), "' + label + '")]/ancestor::label/@for | //label[contains(text(), "' + label + '")]/@for]'
-    + ' | //*[self::input' + type_filter + ' or self::select or self::textarea][@id="' + label + '"]';
+    let xpath = '//*[self::input or self::select or self::textarea]' + type_filter + '[@id=//*[contains(text(), "' + label + '")]/ancestor::label/@for | //label[contains(text(), "' + label + '")]/@for]'
+      + ' | //*[self::input' + type_filter + ' or self::select or self::textarea][@id="' + label + '"]';
+
+    if (typeof region === 'string') {
+      xpath = region + xpath;
+    }
 
     return selector = {selector: xpath, locateStrategy: 'xpath'};
 }

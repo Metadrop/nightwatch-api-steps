@@ -124,6 +124,13 @@ When('I fill in {string} with {string}', (locator, value) => {
 });
 
 /**
+ * Fills a textfield with a specific label in a region.
+ */
+When('I fill in {string} with {string} in {string} region', (locator, value, region) => {
+  return client.fillField(locator, value, region);
+});
+
+/**
  * Attachs a file to a file field.
  */
 When('I attach the file {string} to {string}', async (relative_path, locator) => {
