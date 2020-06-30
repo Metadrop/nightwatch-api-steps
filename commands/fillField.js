@@ -12,6 +12,7 @@ const { client } = require('nightwatch-api');
 module.exports.command = function(label, value) {
     let selector = selectors.buildInputSelector(label);
     client.assert.visible(selector);
+    client.clearValue(selector);
     client.setValue(selector, value);
     return this;
 };
