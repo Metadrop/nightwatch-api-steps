@@ -53,10 +53,10 @@ function buildInputSelector(label, type) {
     let type_filter = '';
 
     if (typeof type === 'string') {
-        type_filter = '[@type="' + type + '"]';
+      type_filter = '[@type="' + type + '"]';
     }
 
-    let xpath = '//div[label[contains(*, "' + label + '")]]/*[self::input' + type_filter + ' or self::select or self::textarea]'
+    const xpath = '//*[self::input or self::select or self::textarea]' + type_filter + '[@id=//*[contains(text(), "' + label + '")]/ancestor::label/@for | //label[contains(text(), "' + label + '")]/@for]'
     + ' | //*[self::input' + type_filter + ' or self::select or self::textarea][@id="' + label + '"]';
 
     return selector = {selector: xpath, locateStrategy: 'xpath'};
