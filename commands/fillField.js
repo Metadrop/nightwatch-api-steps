@@ -8,9 +8,11 @@ const { client } = require('nightwatch-api');
  *   Label of the field.
  * @param {mixed} value
  *   Value of the field.
+ * @param {mixed} region
+ *   Region.
  */
-module.exports.command = function(label, value) {
-    let selector = selectors.buildInputSelector(label);
+module.exports.command = function(label, value, region) {
+    let selector = selectors.buildInputSelector(label, null, region);
     client.assert.visible(selector);
     client.clearValue(selector);
     client.setValue(selector, value);
